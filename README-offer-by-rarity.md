@@ -4,6 +4,7 @@ Automated mass bidding on opensea collections.
 Features included:
 - Bidding on ERC721 assets with WETH
 - Custom expiration time 
+- Filter bids based on traits
 ## Install
 ### NVM aka Node Version Manager
 Windows: https://github.com/coreybutler/nvm-windows
@@ -26,21 +27,30 @@ Copy **.env.dist** and add missing values
 
 **PRIVATE_KEY**: Private key of wallet that should be used for bidding
 
-**ALLOWED_ERRORS**: Allowed errors when retrieving metadata, e.g. *UT: invalid token* for Huxley  
+**IPFS_HOSTS**: IPFS hosts for retrieving metadata, such as https://gateway.pinata.cloud https://gateway.ipfs.io
 
+**ALLOWED_ERRORS**: Allowed errors when retrieving metadata, e.g. *UT: invalid token* for Huxley
 ## Examples ERC721
-### Run without execution: Bid 0.1 WETH on all for sale assets of given contract, which expire in 15min
+### Run without execution: Bid 0.1 WETH on all assets of given contract, which expire in 15min
 ```shell
- node main.js --contract "0x5aeb2a703323f69b20f397bcb7b38610ec37237b" --bid "0.1" --dry-run
+ node erc721.js --contract "0x5aeb2a703323f69b20f397bcb7b38610ec37237b" --bid "0.1" --dry-run
 ```
-### Bid 0.1 WETH on all for sale assets of given contract, which expire in 15min
+### Bid 0.1 WETH on all assets of given contract, which expire in 15min
 ```shell
- node main.js --contract "0x5aeb2a703323f69b20f397bcb7b38610ec37237b" --bid "0.1"
+ node erc721.js --contract "0x5aeb2a703323f69b20f397bcb7b38610ec37237b" --bid "0.1"
 ```
-### Bid 0.1 WETH on all for sale assets of given contract, which expire in 30min
+### Bid 0.1 WETH on all assets of given contract, which expire in 30min
 ```shell
- node main.js --contract "0x5aeb2a703323f69b20f397bcb7b38610ec37237b" --bid "0.1" --offer-expiration "30"
-```  
+ node erc721.js --contract "0x5aeb2a703323f69b20f397bcb7b38610ec37237b" --bid "0.1" --offer-expiration "30"
+```
+### Prefetch metadata for given contract
+```shell
+ node erc721.js --contract "0x5aeb2a703323f69b20f397bcb7b38610ec37237b" --prefetch-metadata
+```
+### Filter before bidding
+```shell
+ node erc721.js --contract "0x5aeb2a703323f69b20f397bcb7b38610ec37237b" --bid "0.1" --trait "Issue Number" --trait-value "Issue 1"
+```
 
 ## Support
 For any questions feel free to join the [discord](https://discord.gg/PFYzMfqVfk)  
